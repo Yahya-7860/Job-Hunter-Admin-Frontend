@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import LoadingPage from '../page/LoadingPage';
 
 const JobCard = ({ setJobs, company, role, id, CurDate }) => {
     const readableCurDate = new Date(CurDate).toDateString();
+    const [loading, setLoading] = useState(false);
+
     const handleDelete = async () => {
         const option = {
             method: "DELETE",
@@ -10,6 +13,7 @@ const JobCard = ({ setJobs, company, role, id, CurDate }) => {
             method: "GET",
         }
         try {
+            setLoading(true);
             await fetch(`http://localhost:5000/post_delete?id=${id}`, option)
                 .then((res) => res.json())
                 .then(async (data) => {
@@ -17,6 +21,7 @@ const JobCard = ({ setJobs, company, role, id, CurDate }) => {
                         await fetch("http://localhost:5000/get_posts", option2)
                             .then((res) => res.json())
                             .then((data) => {
+                                setLoading(false);
                                 setJobs(data.posts);
                             })
                     }
@@ -48,6 +53,9 @@ const JobCard = ({ setJobs, company, role, id, CurDate }) => {
             >
                 Delete
             </button>
+            {
+                loading ? <LoadingPage /> : null
+            }
         </div>
     );
 };

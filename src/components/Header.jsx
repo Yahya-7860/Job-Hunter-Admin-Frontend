@@ -20,7 +20,7 @@ const Header = () => {
     return (
         <>
             {/* Header */}
-            <header className="fixed top-0 w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-2xl  py-3 px-4 flex items-center justify-between">
+            <header className="fixed top-0 w-full bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-2xl py-3 px-4 flex items-center justify-between">
                 {/* Left: Logo */}
                 <div className="flex items-center space-x-2 " >
                     <img src="/images/logo.jpg" alt="Logo" className="rounded-2xl h-8 w-8 sm:h-10 sm:w-10" />
@@ -105,7 +105,7 @@ const Header = () => {
             {/* Overlay when sidebar is open */}
             {sidebarOpen && (
                 <div
-                    className="fixed inset-0 backdrop-blur-sm z-40"
+                    className="fixed inset-0 backdrop-blur-sm"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}

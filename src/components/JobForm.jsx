@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from './Header';
+import LoadingPage from '../page/LoadingPage';
 
 
 const JobForm = () => {
@@ -12,6 +13,8 @@ const JobForm = () => {
         requirement: '',
         applyLink: '',
     });
+    const [loading, setLoading] = useState(false);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,9 +29,11 @@ const JobForm = () => {
             body: JSON.stringify(formData)
         }
         try {
+            setLoading(true);
             await fetch('http://localhost:5000/job_post', option)
                 .then((res) => res.json())
                 .then((data) => {
+                    setLoading(false);
                     toast.success("Post Uploaded");
                     setFormData({
                         companyName: '',
@@ -40,6 +45,7 @@ const JobForm = () => {
                     });
                 })
         } catch (err) {
+            setLoading(false);
             console.error(err);
             toast.error("Unable to upload")
         }
@@ -129,6 +135,9 @@ const JobForm = () => {
                         Submit Job
                     </button>
                 </form>
+                {
+                    loading ? <LoadingPage /> : null
+                }
                 <ToastContainer position='bottom-left' />
             </div>
         </>

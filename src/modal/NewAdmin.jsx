@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IoClose } from "react-icons/io5";
 import { ToastContainer, toast } from 'react-toastify';
+import LoadingPage from '../page/LoadingPage';
 
 
 const NewAdminModal = ({ onClose }) => {
@@ -8,6 +9,8 @@ const NewAdminModal = ({ onClose }) => {
         username: '',
         password: ''
     });
+    const [loading, setLoading] = useState(false);
+
 
 
     const handleSubmit = async (e) => {
@@ -18,20 +21,23 @@ const NewAdminModal = ({ onClose }) => {
             body: JSON.stringify(cred)
         }
         try {
+            setLoading(true);
             await fetch("http://localhost:5000/add_admin", option)
                 .then((res) => res.json())
                 .then((data) => {
+                    setLoading(false);
                     toast.success("Admin Created");
                     setCred((pre) => ({ ...pre, username: '', password: '' }));
                 })
         } catch (error) {
+            setLoading(false);
             console.error(error);
             toast.error(`Unable to create admin ${cred.username}`);
         }
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-3xl bg-opacity-40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-3xl bg-opacity-40 px-5">
             <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
                 {/* Close Button */}
                 <button
@@ -77,6 +83,9 @@ const NewAdminModal = ({ onClose }) => {
                 </form>
             </div>
             <ToastContainer position='bottom-left' />
+            {
+                loading ? <LoadingPage /> : null
+            }
         </div>
     );
 };
