@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
-const Login = ({ onLogin }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+const Login = () => {
+    const [cred, setCred] = useState({
+        username: '',
+        password: ''
+    });
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onLogin({ username, password });
+        const option = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cred)
+        }
+        try {
+            await fetch("http://localhost:5000/admin-login/auth", option)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.Message == "Found") {
+                        localStorage.setItem('token', data.token);
+                        navigate('/');
+                    } else {
+                        toast.error(data.Message);
+                    }
+                    // console.log(data);
+                })
+        } catch (error) {
+            console.error(error);
+            toast.error("Someting went wrong");
+        }
+
     };
 
     return (
@@ -20,8 +47,8 @@ const Login = ({ onLogin }) => {
                         <input
                             type="text"
                             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={cred.username}
+                            onChange={(e) => setCred((prev) => ({ ...prev, username: e.target.value }))}
                             required
                         />
                     </div>
@@ -31,8 +58,8 @@ const Login = ({ onLogin }) => {
                         <input
                             type="password"
                             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={cred.password}
+                            onChange={(e) => setCred((prev) => ({ ...prev, password: e.target.value }))}
                             required
                         />
                     </div>
@@ -45,6 +72,7 @@ const Login = ({ onLogin }) => {
                     </button>
                 </form>
             </div>
+            <ToastContainer position='bottom-left' />
         </div>
     );
 };

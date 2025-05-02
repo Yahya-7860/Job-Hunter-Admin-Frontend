@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import Header from './Header';
 
 
 const JobForm = () => {
     const [formData, setFormData] = useState({
         companyName: '',
+        role: '',
         overview: '',
         jobDescription: '',
         requirement: '',
@@ -30,6 +32,7 @@ const JobForm = () => {
                     toast.success("Post Uploaded");
                     setFormData({
                         companyName: '',
+                        role: '',
                         overview: '',
                         jobDescription: '',
                         requirement: '',
@@ -43,78 +46,92 @@ const JobForm = () => {
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-10 ">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
-            <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                    <label className="block font-medium mb-1">Company Name</label>
-                    <input
-                        type="text"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={(handleChange)}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
-                </div>
+        <>
+            <Header />
+            <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-10 ">
+                <h2 className="text-2xl font-semibold mb-6 text-center">Post a Job</h2>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label className="block font-medium mb-1">Company Name</label>
+                        <input
+                            type="text"
+                            name="companyName"
+                            value={formData.companyName}
+                            onChange={(handleChange)}
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Role</label>
+                        <input
+                            type="text"
+                            name="role"
+                            value={formData.role}
+                            onChange={(handleChange)}
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium mb-1">Overview</label>
-                    <textarea
-                        name="overview"
-                        value={formData.overview}
-                        onChange={handleChange}
-                        rows="3"
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                        required
-                    />
-                </div>
+                    <div>
+                        <label className="block font-medium mb-1">Overview</label>
+                        <textarea
+                            name="overview"
+                            value={formData.overview}
+                            onChange={handleChange}
+                            rows="3"
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium mb-1">Job Description</label>
-                    <textarea
-                        name="jobDescription"
-                        value={formData.jobDescription}
-                        onChange={handleChange}
-                        rows="4"
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                        required
-                    />
-                </div>
+                    <div>
+                        <label className="block font-medium mb-1">Job Description</label>
+                        <textarea
+                            name="jobDescription"
+                            value={formData.jobDescription}
+                            onChange={handleChange}
+                            rows="4"
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium mb-1">Requirements</label>
-                    <textarea
-                        name="requirement"
-                        value={formData.requirement}
-                        onChange={handleChange}
-                        rows="3"
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                        required
-                    />
-                </div>
+                    <div>
+                        <label className="block font-medium mb-1">Requirements</label>
+                        <textarea
+                            name="requirement"
+                            value={formData.requirement}
+                            onChange={handleChange}
+                            rows="3"
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium mb-1">Apply Link</label>
-                    <input
-                        type="text"
-                        name="applyLink"
-                        value={formData.applyLink}
-                        onChange={handleChange}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
-                </div>
+                    <div>
+                        <label className="block font-medium mb-1">Apply Link</label>
+                        <input
+                            type="text"
+                            name="applyLink"
+                            value={formData.applyLink}
+                            onChange={handleChange}
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
 
-                <button
-                    type="submit"
-                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
-                >
-                    Submit Job
-                </button>
-            </form>
-            <ToastContainer position='bottom-left' />
-        </div>
+                    <button
+                        type="submit"
+                        className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Submit Job
+                    </button>
+                </form>
+                <ToastContainer position='bottom-left' />
+            </div>
+        </>
     );
 };
 
