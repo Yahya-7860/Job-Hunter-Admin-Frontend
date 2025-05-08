@@ -5,6 +5,8 @@ import LoadingPage from '../page/LoadingPage';
 
 
 const JobForm = () => {
+    const HOST = import.meta.env.VITE_HOST;
+
     const [formData, setFormData] = useState({
         companyName: '',
         role: '',
@@ -12,6 +14,7 @@ const JobForm = () => {
         jobDescription: '',
         requirement: '',
         applyLink: '',
+        email: ''
     });
     const [loading, setLoading] = useState(false);
 
@@ -30,7 +33,7 @@ const JobForm = () => {
         }
         try {
             setLoading(true);
-            await fetch('http://localhost:5000/job_post', option)
+            await fetch(`http://${HOST}:5000/job_post`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     setLoading(false);
@@ -42,6 +45,7 @@ const JobForm = () => {
                         jobDescription: '',
                         requirement: '',
                         applyLink: '',
+                        email: ''
                     });
                 })
         } catch (err) {
@@ -64,6 +68,7 @@ const JobForm = () => {
                             name="companyName"
                             value={formData.companyName}
                             onChange={(handleChange)}
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
@@ -75,6 +80,7 @@ const JobForm = () => {
                             name="role"
                             value={formData.role}
                             onChange={(handleChange)}
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
@@ -87,6 +93,7 @@ const JobForm = () => {
                             value={formData.overview}
                             onChange={handleChange}
                             rows="3"
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                             required
                         />
@@ -99,8 +106,9 @@ const JobForm = () => {
                             value={formData.jobDescription}
                             onChange={handleChange}
                             rows="4"
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                            required
+
                         />
                     </div>
 
@@ -111,8 +119,9 @@ const JobForm = () => {
                             value={formData.requirement}
                             onChange={handleChange}
                             rows="3"
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                            required
+
                         />
                     </div>
 
@@ -123,8 +132,18 @@ const JobForm = () => {
                             name="applyLink"
                             value={formData.applyLink}
                             onChange={handleChange}
+                            autoComplete='off'
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">HR Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
 

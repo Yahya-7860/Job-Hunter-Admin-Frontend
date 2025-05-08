@@ -6,6 +6,8 @@ import LoadingPage from './LoadingPage';
 
 
 const Login = () => {
+    const HOST = import.meta.env.VITE_HOST;
+
     const [cred, setCred] = useState({
         username: '',
         password: ''
@@ -23,7 +25,7 @@ const Login = () => {
         }
         try {
             setLoading(true);
-            await fetch("http://localhost:5000/admin-login/auth", option)
+            await fetch(`http://${HOST}:5000/admin-login/auth`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.Message == "Found") {

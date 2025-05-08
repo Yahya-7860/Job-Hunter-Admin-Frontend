@@ -4,6 +4,7 @@ import LoadingPage from '../page/LoadingPage';
 const JobCard = ({ setJobs, company, role, id, CurDate }) => {
     const readableCurDate = new Date(CurDate).toDateString();
     const [loading, setLoading] = useState(false);
+    const HOST = import.meta.env.VITE_HOST;
 
     const handleDelete = async () => {
         const option = {
@@ -14,11 +15,11 @@ const JobCard = ({ setJobs, company, role, id, CurDate }) => {
         }
         try {
             setLoading(true);
-            await fetch(`http://localhost:5000/post_delete?id=${id}`, option)
+            await fetch(`http://${HOST}:5000/post_delete?id=${id}`, option)
                 .then((res) => res.json())
                 .then(async (data) => {
                     if (data.Message == "Post Deleted") {
-                        await fetch("http://localhost:5000/get_posts", option2)
+                        await fetch(`http://${HOST}:5000/get_posts`, option2)
                             .then((res) => res.json())
                             .then((data) => {
                                 setLoading(false);

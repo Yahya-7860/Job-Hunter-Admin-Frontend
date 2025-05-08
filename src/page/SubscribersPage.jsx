@@ -6,6 +6,8 @@ import SubsCard from '../components/SubsCard';
 
 
 const SubscribersPage = () => {
+    const HOST = import.meta.env.VITE_HOST;
+
     const navigate = useNavigate();
     const [subs, setSubs] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const SubscribersPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            await fetch("http://localhost:5000/mail/get_email", option)
+            await fetch(`http://${HOST}:5000/mail/get_email`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     setSubs(data.AllMails);

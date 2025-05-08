@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path='/' element={<ProtectedRoute element={JobForm} />} /> */}
-        <Route path='/' element={<JobForm />} />
+        <Route path='/' element={<ProtectedRoute element={JobForm} />} />
+        {/* <Route path='/' element={<JobForm />} /> */}
         <Route path='/job-cards' element={<JobCardPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/email-card' element={<SubscribersPage />} />

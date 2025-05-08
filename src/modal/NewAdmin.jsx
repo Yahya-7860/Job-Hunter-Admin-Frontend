@@ -5,6 +5,8 @@ import LoadingPage from '../page/LoadingPage';
 
 
 const NewAdminModal = ({ onClose }) => {
+    const HOST = import.meta.env.VITE_HOST;
+
     const [cred, setCred] = useState({
         username: '',
         password: ''
@@ -22,7 +24,7 @@ const NewAdminModal = ({ onClose }) => {
         }
         try {
             setLoading(true);
-            await fetch("http://localhost:5000/add_admin", option)
+            await fetch(`http://${HOST}:5000/add_admin`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     setLoading(false);

@@ -3,6 +3,7 @@ import LoadingPage from '../page/LoadingPage';
 
 const SubsCard = ({ setSubs, email, id }) => {
     const [loading, setLoading] = useState(false);
+    const HOST = import.meta.env.VITE_HOST;
 
     const handleDelete = async () => {
         const option = {
@@ -13,11 +14,11 @@ const SubsCard = ({ setSubs, email, id }) => {
         }
         try {
             setLoading(true);
-            await fetch(`http://localhost:5000/mail/delete_email?id=${id}`, option)
+            await fetch(`http://${HOST}:5000/mail/delete_email?id=${id}`, option)
                 .then((res) => res.json())
                 .then(async (data) => {
                     if (data.Message == "deleted") {
-                        await fetch("http://localhost:5000/mail/get_email", option2)
+                        await fetch(`http://${HOST}:5000/mail/get_email`, option2)
                             .then((res) => res.json())
                             .then((data) => {
                                 setLoading(false);

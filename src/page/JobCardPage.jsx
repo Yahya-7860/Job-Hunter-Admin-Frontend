@@ -9,6 +9,7 @@ const JobCardPage = () => {
     const navigate = useNavigate();
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(false);
+    const HOST = import.meta.env.VITE_HOST;
 
     const handleBack = () => {
         navigate('/');
@@ -19,7 +20,7 @@ const JobCardPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            await fetch("http://localhost:5000/get_posts", option)
+            await fetch(`http://${HOST}:5000/get_posts`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     // console.log(data);
