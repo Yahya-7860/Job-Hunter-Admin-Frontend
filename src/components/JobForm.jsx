@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from './Header';
 import LoadingPage from '../page/LoadingPage';
@@ -10,6 +10,7 @@ const JobForm = () => {
     const [formData, setFormData] = useState({
         companyName: '',
         role: '',
+        jobType: '',
         overview: '',
         jobDescription: '',
         requirement: '',
@@ -17,7 +18,6 @@ const JobForm = () => {
         email: ''
     });
     const [loading, setLoading] = useState(false);
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -36,17 +36,23 @@ const JobForm = () => {
             await fetch(`http://${HOST}:5000/job_post`, option)
                 .then((res) => res.json())
                 .then((data) => {
-                    setLoading(false);
-                    toast.success("Post Uploaded");
-                    setFormData({
-                        companyName: '',
-                        role: '',
-                        overview: '',
-                        jobDescription: '',
-                        requirement: '',
-                        applyLink: '',
-                        email: ''
-                    });
+                    if (data.Message == "Job Posted") {
+                        setLoading(false);
+                        toast.success("Post Uploaded");
+                        setFormData({
+                            companyName: '',
+                            role: '',
+                            overview: '',
+                            jobDescription: '',
+                            requirement: '',
+                            applyLink: '',
+                            email: ''
+                        });
+                    }
+                    else {
+                        setLoading(false);
+                        toast.error("server error")
+                    }
                 })
         } catch (err) {
             setLoading(false);
@@ -84,6 +90,19 @@ const JobForm = () => {
                             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required
                         />
+                    </div>
+                    <div>
+                        <label className="block font-medium mb-1">Job Type</label>
+                        <div className='flex gap-5'>
+                            <div className='flex text-center gap-1'>
+                                <input type="radio" id="full_time" name='jobType' value="full time" onChange={handleChange} />
+                                <label htmlFor="full_time">Full Time</label>
+                            </div>
+                            <div className='flex text-center gap-1'>
+                                <input type="radio" id="internship" name='jobType' value="internship" onChange={handleChange} />
+                                <label htmlFor="internship">Internship</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div>

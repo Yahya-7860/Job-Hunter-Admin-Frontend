@@ -36,7 +36,7 @@ const SubscribersPage = () => {
             <div>
                 <FaArrowAltCircleLeft className='text-3xl' onClick={handleBack} />
             </div>
-            <h1 className='flex justify-center text-3xl font-bold mb-6 text-white'>All Jobs</h1>
+            <h1 className='flex justify-center text-3xl font-bold mb-6 text-white'>All Subscribers</h1>
             <div className="space-y-4">
                 {
                     [...subs].reverse().map((one, i) => (

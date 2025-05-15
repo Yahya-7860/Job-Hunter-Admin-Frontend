@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LoadingPage from '../page/LoadingPage';
 
-const JobCard = ({ setJobs, company, role, id, CurDate }) => {
+const JobCard = ({ setJobs, company, role, id, CurDate, jobType }) => {
     const readableCurDate = new Date(CurDate).toDateString();
     const [loading, setLoading] = useState(false);
     const HOST = import.meta.env.VITE_HOST;
@@ -42,6 +42,10 @@ const JobCard = ({ setJobs, company, role, id, CurDate }) => {
                 <div className="flex space-x-1">
                     <span className="font-medium">Role : </span>
                     <span>{role}</span>
+                </div>
+                <div className="flex space-x-1">
+                    <span className="font-medium">Job Type : </span>
+                    <span>{jobType}</span>
                 </div>
                 <div className="flex space-x-1">
                     <span className="font-medium">Uploaded : </span>

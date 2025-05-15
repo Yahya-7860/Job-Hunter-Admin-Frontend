@@ -20,7 +20,7 @@ const JobCardPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            await fetch(`http://${HOST}:5000/get_posts`, option)
+            await fetch(`http://${HOST}:5000/get_all_posts`, option)
                 .then((res) => res.json())
                 .then((data) => {
                     // console.log(data);
@@ -40,7 +40,7 @@ const JobCardPage = () => {
             <div className="space-y-4">
                 {
                     [...jobs].reverse().map((one, i) => (
-                        <JobCard key={i} company={one.companyName} role={one.role} id={one._id} setJobs={setJobs} CurDate={one.createdAt} />
+                        <JobCard key={i} company={one.companyName} role={one.role} jobType={one.jobType} id={one._id} setJobs={setJobs} CurDate={one.createdAt} />
                     ))
                 }
             </div>
