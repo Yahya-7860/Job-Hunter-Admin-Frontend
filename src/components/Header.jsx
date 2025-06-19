@@ -80,13 +80,13 @@ const Header = () => {
                 <div className="p-4 flex flex-col space-y-4">
                     <button
                         onClick={handleAllJobs}
-                        className="bg-yellow-600 hover:bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="bg-yellow-600 hover:bg-yellow-500 cursor-pointer text-white px-4 py-2 rounded-md"
                     >
                         All Jobs
                     </button>
                     <button
                         onClick={handleSubcribers}
-                        className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                        className="bg-green-600 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded-md"
                     >
                         Subscribers
                     </button>
@@ -95,7 +95,7 @@ const Header = () => {
                             setIsOpen(true);
                             setSidebarOpen(false);
                         }}
-                        className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md"
+                        className="bg-blue-600 hover:bg-blue-500 cursor-pointer text-white px-4 py-2 rounded-md"
                     >
                         Add Admin
                     </button>

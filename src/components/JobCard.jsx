@@ -19,7 +19,7 @@ const JobCard = ({ setJobs, company, role, id, CurDate, jobType }) => {
                 .then((res) => res.json())
                 .then(async (data) => {
                     if (data.Message == "Post Deleted") {
-                        await fetch(`http://${HOST}:5000/get_posts`, option2)
+                        await fetch(`http://${HOST}:5000/get_all_posts`)
                             .then((res) => res.json())
                             .then((data) => {
                                 setLoading(false);
@@ -54,7 +54,7 @@ const JobCard = ({ setJobs, company, role, id, CurDate, jobType }) => {
             </div>
             <button
                 onClick={handleDelete}
-                className="text-xs sm:text-sm bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-1 rounded-md transition"
+                className="text-xs sm:text-sm bg-red-500 hover:bg-red-600 active:bg-red-800 text-white px-3 sm:px-4 py-1 rounded-md transition cursor-pointer"
             >
                 Delete
             </button>

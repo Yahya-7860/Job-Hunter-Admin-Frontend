@@ -168,7 +168,7 @@ const JobForm = () => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+                        className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 active:bg-blue-800 cursor-pointer transition duration-300"
                     >
                         Submit Job
                     </button>
