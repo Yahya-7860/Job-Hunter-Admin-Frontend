@@ -18,6 +18,8 @@ const JobForm = () => {
         email: ''
     });
     const [loading, setLoading] = useState(false);
+    const [allSubs, setAllSubs] = useState([]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,14 +28,29 @@ const JobForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const option = {
+
+        try {
+            const response = await fetch(`http://${HOST}:5000/mail/get_email`, { method: 'GET' })
+            if (response.status == 200) {
+                const data = await response.json();
+                data.AllMails.map((item) => {
+                    setAllSubs((prev) => ([...prev, item.email]))
+                })
+            }
+        } catch (error) {
+            console.log("Error in getting subscribers");
+            console.error(error)
+        }
+
+        const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({ formData, allSubs })
         }
+
         try {
             setLoading(true);
-            await fetch(`http://${HOST}:5000/job_post`, option)
+            await fetch(`http://${HOST}:5000/job_post`, options)
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.Message == "Job Posted") {
